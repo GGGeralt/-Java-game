@@ -9,9 +9,9 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setTitle("Java The Game");
-		config.setWindowedMode(1920,1080);
+		config.setWindowedMode(600,600);
 		config.useVsync(true);
-		config.setForegroundFPS(60);
+		config.setForegroundFPS(300);
 		new Lwjgl3Application(new JavaGame(), config);
 	}
 }
