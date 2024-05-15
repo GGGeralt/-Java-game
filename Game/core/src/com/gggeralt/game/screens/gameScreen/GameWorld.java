@@ -25,7 +25,7 @@ public class GameWorld {
 
     public GameWorld() {
         bricks = new Array<>();
-        hero = new Hero();
+        hero = new Hero(new Vector2(0,64));
         this.assetManager = assetManager;
         this.spriteBatch = new SpriteBatch();
         this.brick = new CollisionElement(new Texture(Gdx.files.internal("bricks.png")), 64, 64);
@@ -47,6 +47,7 @@ public class GameWorld {
         spriteBatch.begin();
         spriteBatch.draw(backgroundTexture, 0, 0, 1024, 768);
         spriteBatch.draw(new Texture("bricks.png"), 0, 0);
+        hero.drawAnimated();
         brick.draw();
         brickFloor.draw();
         brickCeil.draw();

@@ -20,7 +20,7 @@ public class CollisionElement extends Actor {
     private boolean isMovingLeft, isMovingRight, isJumping;
     private float jumpVelocity;
     private float gravity;
-    private com.badlogic.gdx.math.Rectangle collisionRectangle;
+    public com.badlogic.gdx.math.Rectangle collisionRectangle;
     private Texture texture;
 
     public CollisionElement(Array<Texture> pngSet, float x, float y) {
@@ -100,5 +100,4 @@ public class CollisionElement extends Actor {
             System.out.println("true");
         return collisionRectangle.overlaps(other.collisionRectangle);
     }
-
 }
