@@ -26,7 +26,6 @@ public class GameScreen extends ScreenAdapter {
         gameWorld.update(delta);
         gameWorld.draw();
     }
-
     @Override
     public void resize(int width, int height) {
         gameWorld.getViewport().update(width, height);

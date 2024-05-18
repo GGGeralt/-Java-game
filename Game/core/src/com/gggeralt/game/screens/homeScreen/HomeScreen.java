@@ -32,12 +32,10 @@ public class HomeScreen extends ScreenAdapter {
     private SpriteBatch spriteBatch;
     private Texture backgroundTexture;
     private BitmapFont bitmapFont;
-
     public HomeScreen(AssetManager assetManager) {
         this.assetManager = assetManager;
         skin = assetManager.get(Assets.SKIN);
     }
-
     @Override
     public void show() {
         spriteBatch = new SpriteBatch();
@@ -79,7 +77,6 @@ public class HomeScreen extends ScreenAdapter {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         spriteBatch.begin();
         spriteBatch.draw(backgroundTexture, 0, 0, 1024, 768);
         bitmapFont.setColor(Color.WHITE);
@@ -88,7 +85,6 @@ public class HomeScreen extends ScreenAdapter {
         spriteBatch.end();
         stage.act();
         stage.draw();
-
     }
 
     @Override

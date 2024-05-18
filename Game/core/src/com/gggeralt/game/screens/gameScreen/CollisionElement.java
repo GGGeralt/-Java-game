@@ -71,22 +71,6 @@ public class CollisionElement extends Actor {
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) setX(x -= 200 * Gdx.graphics.getDeltaTime());
             if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) setX(x + 200 * Gdx.graphics.getDeltaTime());
         }
-
-//        if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && !isJumping) {
-//            isJumping = true;
-//            jumpVelocity = 10; // Initial jump velocity
-//        }
-//
-//        // Apply jump velocity
-//        if (isJumping) {
-//            heroY += jumpVelocity;
-//            jumpVelocity -= gravity;
-//            if (jumpVelocity <= 0) {
-//                isJumping = false;
-//            }
-//        }
-
-
     }
 
     @Override
@@ -96,8 +80,6 @@ public class CollisionElement extends Actor {
     }
 
     public boolean checkCollision(CollisionElement other) {
-        if (collisionRectangle.overlaps(other.collisionRectangle))
-            System.out.println("true");
         return collisionRectangle.overlaps(other.collisionRectangle);
     }
 
