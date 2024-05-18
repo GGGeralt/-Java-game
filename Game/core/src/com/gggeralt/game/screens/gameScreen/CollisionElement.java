@@ -40,11 +40,10 @@ public class CollisionElement extends Actor {
     }
 
     public void drawAnimated() {
-
         if (isMovingLeft || isMovingRight) {
             stateTime += Gdx.graphics.getDeltaTime();
         } else {
-            stateTime = 0; // Reset state time when not moving
+            stateTime = 0;
         }
         currentFrame = animation.getKeyFrame(stateTime, isMovingLeft || isMovingRight);
         if (!isJumping && collisionRectangle.getY() > 0) {
@@ -83,4 +82,7 @@ public class CollisionElement extends Actor {
         return collisionRectangle.overlaps(other.collisionRectangle);
     }
 
+    public Texture getTexture(){
+        return texture;
+    }
 }
