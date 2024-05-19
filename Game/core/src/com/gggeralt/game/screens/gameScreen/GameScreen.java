@@ -167,9 +167,6 @@ public class GameScreen extends ScreenAdapter {
         jumpVelocity = jump_force;
     }
 
-    private Texture nextTexture(int i){
-        return images.get(i);
-    }
 
     private void secondJump() {
         isSecondJumpAvailable = false;
