@@ -22,6 +22,7 @@ public class Map {
         IntStream.range(75, 80).forEach(i -> coords.add(new Vector2(i * 64, 128)));
         IntStream.range(83, 93).forEach(i -> coords.add(new Vector2(i * 64, 192)));
         IntStream.range(95, 99).forEach(i -> coords.add(new Vector2(i * 64, 320)));
+
     }
 
     public List<Vector2> getCoords() {
