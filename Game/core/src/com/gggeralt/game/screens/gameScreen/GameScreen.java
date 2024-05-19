@@ -151,18 +151,22 @@ public class GameScreen extends ScreenAdapter {
                 }
             }
             heroBounds.setPosition(hero.getX(), hero.getY());
-            if (canMove && hero.getX()<=256) {
+            if (canMove && hero.getX() <= 256) {
                 hero.setX(hero.getX() + 5);
-                if(animationTimeout==2)
+                if (animationTimeout == 2)
                     hero.setTexture(images.get(textureNumber));
-            }else if(hero.getX()>256 && camera.position.x + camera.viewportWidth / 2 < 6400 + camera.viewportWidth){
-                camera.position.x += 5;
-                hero.setX(hero.getX()+5);
-                if(animationTimeout==2)
+            } else if (canMove && hero.getX() > 256) {
+                if (camera.position.x + camera.viewportWidth / 2 < 6400) {
+                    camera.position.x += 5;
+                }
+                if(hero.getX()<6400-hero.getWidth())
+                    hero.setX(hero.getX() + 5);
+                if (animationTimeout == 2)
                     hero.setTexture(images.get(textureNumber));
             }
             canMove = true;
         }
+
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             heroBounds.setPosition(hero.getX() - 5, hero.getY());
             for (Rectangle brickBound : brickBounds) {
@@ -174,13 +178,13 @@ public class GameScreen extends ScreenAdapter {
             }
             heroBounds.setPosition(hero.getX(), hero.getY());
             if (canMove && hero.getX() > 256) {
-                if (camera.position.x - camera.viewportWidth / 2 > 0) {
+                hero.setX(hero.getX() - 5);
+                if (camera.position.x - camera.viewportWidth / 2 > 0 && hero.getX() < camera.position.x - 256) {
                     camera.position.x -= 5;
                 }
-                hero.setX(hero.getX() - 5);
                 if (animationTimeout == 2)
                     hero.setTexture(imagesLeft.get(textureNumber));
-            } else if (canMove && hero.getX()>0 && hero.getX() <= 256) {
+            } else if (canMove && hero.getX() > 0 && hero.getX() <= 256) {
                 hero.setX(hero.getX() - 5);
                 if (animationTimeout == 2)
                     hero.setTexture(imagesLeft.get(textureNumber));
