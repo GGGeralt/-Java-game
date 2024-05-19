@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -35,10 +36,14 @@ public class GameScreen extends ScreenAdapter {
     private ArrayList<Texture> images;
     private int textureNumber=0;
     private int animationTimeout=0;
+    private Music gameMusic;
 
     public GameScreen() {
         map = new Map();
         batch = new SpriteBatch();
+        gameMusic=Gdx.audio.newMusic(Gdx.files.internal("music.ogg"));
+        gameMusic.setLooping(true);
+        gameMusic.play();
         brickTexture = new Texture("bricks.png");
         backgroundTexture = new Texture("background.png");
         camera = new OrthographicCamera();
