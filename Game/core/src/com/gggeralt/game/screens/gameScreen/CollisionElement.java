@@ -39,6 +39,10 @@ public class CollisionElement extends Actor {
 
     }
 
+    public void setTexture(Texture t){
+        this.texture=t;
+    }
+
     public void drawAnimated() {
         if (isMovingLeft || isMovingRight) {
             stateTime += Gdx.graphics.getDeltaTime();
