@@ -141,6 +141,11 @@ public class GameScreen extends ScreenAdapter {
         }else if(animationTimeout==2&&textureNumber==3){
             textureNumber=0;
         }
+
+        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+            Gdx.app.exit();
+        }
+
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             heroBounds.setPosition(hero.getX() + 5, hero.getY());
             for (Rectangle brickBound : brickBounds) {
