@@ -151,7 +151,7 @@ public class GameScreen extends ScreenAdapter {
             for (Rectangle brickBound : brickBounds) {
                 if (heroBounds.overlaps(brickBound)) {
                     canMove = false;
-                    System.out.println(canMove);
+                    isSecondJumpAvailable = true;
                     break;
                 }
             }
@@ -177,7 +177,7 @@ public class GameScreen extends ScreenAdapter {
             for (Rectangle brickBound : brickBounds) {
                 if (heroBounds.overlaps(brickBound)) {
                     canMove = false;
-                    System.out.println(canMove + " w tyl");
+                    isSecondJumpAvailable = true;
                     break;
                 }
             }
