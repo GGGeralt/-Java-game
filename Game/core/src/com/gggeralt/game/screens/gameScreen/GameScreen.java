@@ -25,6 +25,7 @@ public class GameScreen extends ScreenAdapter {
     private Texture controlSignTexture;
     private Texture backgroundTexture;
     private Texture cloudTexture;
+    private Texture chestTexture;
     private SpriteBatch batch;
     private OrthographicCamera camera;
     private CollisionElement hero;
@@ -41,15 +42,22 @@ public class GameScreen extends ScreenAdapter {
     private int textureNumber=0;
     private int animationTimeout=0;
     private Music gameMusic;
+    private Music pickUpSound;
+    private Music jumpSound;
 
     public GameScreen() {
         map = new Map();
         mapDecorations=new MapDecorations();
         batch = new SpriteBatch();
+        pickUpSound=Gdx.audio.newMusic(Gdx.files.internal("pickUp.mp3"));
+        jumpSound=Gdx.audio.newMusic(Gdx.files.internal("jumpSound.mp3"));
+        jumpSound.setVolume(100f);
         gameMusic=Gdx.audio.newMusic(Gdx.files.internal("music.ogg"));
         gameMusic.setLooping(true);
+        gameMusic.setVolume(0.02f);
         gameMusic.play();
         brickTexture = new Texture("bricks.png");
+        chestTexture = new Texture("chest.png");
         backgroundTexture = new Texture("background.png");
         controlSignTexture=new Texture("controlSign.png");
         cloudTexture=new Texture("cloud.png");
@@ -82,6 +90,11 @@ public class GameScreen extends ScreenAdapter {
         for (Vector2 coord : map.getCoords()) {
             brickBounds.add(new Rectangle(coord.x, coord.y, brickTexture.getWidth(), brickTexture.getHeight()));
         }
+
+        brickBounds.add(new Rectangle(map.getChestCoords().x, map.getChestCoords().y, chestTexture.getWidth(), chestTexture.getHeight()));
+
+
+
         canMove = true;
     }
 
@@ -115,13 +128,15 @@ public class GameScreen extends ScreenAdapter {
         for (Vector2 coord : coords) {
             batch.draw(brickTexture, coord.x, coord.y);
         }
+        batch.draw(chestTexture, map.getChestCoords().x,map.getChestCoords().y);
     }
     private void renderMapDecorations() {
         List<Vector2> coords = mapDecorations.getCoords();
         batch.draw(controlSignTexture,coords.get(0).x,coords.get(0).y);
-        for(int i=1;i<coords.size();i++){
+        for(int i=1;i<coords.size()-1;i++){
             batch.draw(cloudTexture,coords.get(i).x,coords.get(i).y);
         }
+        batch.draw(chestTexture,coords.get(coords.size()-1).x,coords.get(coords.size()-1).y);
     }
 
     private void renderHero() {
@@ -141,12 +156,28 @@ public class GameScreen extends ScreenAdapter {
         }else if(animationTimeout==2&&textureNumber==3){
             textureNumber=0;
         }
+
+        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+            Gdx.app.exit();
+        }
+
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             heroBounds.setPosition(hero.getX() + 5, hero.getY());
             for (Rectangle brickBound : brickBounds) {
                 if (heroBounds.overlaps(brickBound)) {
                     canMove = false;
-                    System.out.println(canMove);
+                    isSecondJumpAvailable = true;
+
+                    if(brickBound.x == map.getChestCoords().x && brickBound.y == map.getChestCoords().y)
+                    {
+                        System.out.println("DZIALA");
+                        brickBounds.remove(brickBound);
+                        map.getChestCoords().x=20000;
+                        map.getChestCoords().y=20000;
+                        pickUpSound.setVolume(100f);
+                        pickUpSound.play();
+
+                    }
                     break;
                 }
             }
@@ -172,7 +203,7 @@ public class GameScreen extends ScreenAdapter {
             for (Rectangle brickBound : brickBounds) {
                 if (heroBounds.overlaps(brickBound)) {
                     canMove = false;
-                    System.out.println(canMove + " w tyl");
+                    isSecondJumpAvailable = true;
                     break;
                 }
             }
@@ -203,6 +234,7 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void jump() {
+        jumpSound.play();
         isJumping = true;
         isSecondJumpAvailable = true;
         jumpVelocity = jump_force;
@@ -210,6 +242,7 @@ public class GameScreen extends ScreenAdapter {
 
 
     private void secondJump() {
+        jumpSound.play();
         isSecondJumpAvailable = false;
         jumpVelocity = jump_force;
     }

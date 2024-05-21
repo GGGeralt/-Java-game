@@ -21,11 +21,10 @@ public class MapDecorations {
                 }else
                     coords.add(new Vector2(i*256,420));
             }
-
-
            // coords.add(new Vector2(i*320,480));
            // coords.add(new Vector2(i*180,420));
         }
+
     }
     public List<Vector2> getCoords() {
         return coords;
