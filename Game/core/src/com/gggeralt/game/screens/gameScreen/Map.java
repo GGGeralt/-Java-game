@@ -7,6 +7,7 @@ import java.util.stream.IntStream;
 
 public class Map {
     private final List<Vector2> coords;
+    private final Vector2 chestCoord;
 
     public Map() {
         coords = new ArrayList<>();
@@ -16,6 +17,7 @@ public class Map {
         IntStream.range(25, 29).forEach(i -> coords.add(new Vector2(i * 64, 192)));
         IntStream.range(2, 6).forEach(i -> coords.add(new Vector2( 20*64, i*64)));
         IntStream.range(1, 4).forEach(i -> coords.add(new Vector2( 29*64, i*64)));
+
         IntStream.range(35, 45).forEach(i -> coords.add(new Vector2(i * 64, 128)));
         IntStream.range(39, 41).forEach(i -> coords.add(new Vector2(i * 64, 192)));
         IntStream.range(50, 52).forEach(i -> coords.add(new Vector2(i * 64, 128)));
@@ -25,10 +27,15 @@ public class Map {
         IntStream.range(83, 93).forEach(i -> coords.add(new Vector2(i * 64, 192)));
         IntStream.range(95, 99).forEach(i -> coords.add(new Vector2(i * 64, 320)));
 
+        chestCoord = new Vector2(27 * 64, 64);
+
     }
 
     public List<Vector2> getCoords() {
         return coords;
+    }
+    public Vector2 getChestCoords() {
+        return chestCoord;
     }
 }
 
