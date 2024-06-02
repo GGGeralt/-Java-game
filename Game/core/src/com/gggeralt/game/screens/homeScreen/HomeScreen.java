@@ -19,10 +19,12 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gggeralt.game.Assets;
 import com.gggeralt.game.screens.gameScreen.GameScreen;
+import com.gggeralt.game.screens.gameScreen.GameSettings;
 
 import javax.swing.plaf.nimbus.State;
 
 public class HomeScreen extends ScreenAdapter {
+
 
     private Stage stage;
     private Viewport viewport;
@@ -61,7 +63,14 @@ public class HomeScreen extends ScreenAdapter {
                 Gdx.app.exit();
             }
         });
+        addButton("SETTINGS").addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
 
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new GameSettings(assetManager));
+
+            }
+        });
         Gdx.input.setInputProcessor(stage);
     }
 
